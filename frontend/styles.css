@@ -1,0 +1,245 @@
+:root {
+  --bg: #f4f6f8;
+  --card-bg: #ffffff;
+  --accent: #0a8f5b;
+  --accent-dark: #06693f;
+  --text: #1f2933;
+  --muted: #6b7280;
+  --border: #d7dde3;
+  --danger: #d1453b;
+  --high: #d1453b;
+  --medium: #d99a2b;
+  --low: #3b82d1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app-header {
+  background: var(--accent);
+  color: white;
+  padding: 20px 24px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.tagline {
+  margin: 4px 0 0;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.controls-bar label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.controls-bar input,
+.controls-bar select {
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+/* Task 13: position: sticky on the add-task form area so it stays
+   visible while the user scrolls a long task list. */
+.sticky-form {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  padding: 12px 0;
+  z-index: 10;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+#add-task-form,
+#quick-add-form {
+  flex: 1 1 260px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 0 0 16px 0;
+}
+
+#add-task-form h2,
+#quick-add-form h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.error-message {
+  display: block;
+  color: var(--danger);
+  font-size: 0.8rem;
+  margin-top: 4px;
+  min-height: 1em;
+}
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+button:hover {
+  background: var(--accent-dark);
+}
+
+.stats-panel {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+}
+
+#task-list-container {
+  /* Box model demonstrated deliberately: padding, border, margin. */
+  padding: 12px;
+  border: 1px solid var(--border);
+  margin: 0 0 40px 0;
+  border-radius: 8px;
+  background: var(--card-bg);
+  min-height: 80px;
+}
+
+.task-item {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  margin: 0 0 10px 0;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.task-item:last-child {
+  margin-bottom: 0;
+}
+
+.task-main {
+  flex: 1 1 auto;
+}
+
+.task-title {
+  font-weight: 600;
+}
+
+.task-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: white;
+  margin-right: 6px;
+}
+
+.badge.high { background: var(--high); }
+.badge.medium { background: var(--medium); }
+.badge.low { background: var(--low); }
+
+.task-actions button {
+  margin-left: 6px;
+  font-size: 0.8rem;
+  padding: 6px 10px;
+}
+
+.task-actions .delete-btn {
+  background: var(--danger);
+}
+
+.empty-state {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Task 10: at least two breakpoints that visibly change the layout. */
+@media (max-width: 768px) {
+  .sticky-form {
+    flex-direction: column;
+  }
+
+  .controls-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  #add-task-form,
+  #quick-add-form {
+    padding: 12px;
+  }
+
+  .task-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .task-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .app-header h1 {
+    font-size: 1.4rem;
+  }
+}

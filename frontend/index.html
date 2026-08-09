@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow — Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>TaskFlow</h1>
+    <p class="tagline">Task &amp; project management for dark-store engineering pods</p>
+  </header>
+
+  <main>
+    <section class="controls-bar">
+      <label for="project-select">Project ID</label>
+      <input type="number" id="project-select" value="1" min="1" />
+
+      <label for="sort-select">Sort by</label>
+      <select id="sort-select">
+        <option value="">None</option>
+        <option value="priority">Priority</option>
+        <option value="due_date">Due date</option>
+      </select>
+
+      <label for="search-input">Search title</label>
+      <input type="text" id="search-input" placeholder="exact title..." />
+      <select id="search-algo">
+        <option value="binary">binary</option>
+        <option value="linear">linear</option>
+      </select>
+      <button id="search-btn" type="button">Search</button>
+      <button id="clear-search-btn" type="button">Clear</button>
+    </section>
+
+    <section id="add-task-form-wrapper" class="sticky-form">
+      <form id="add-task-form">
+        <h2>Add a task</h2>
+        <div class="field">
+          <input type="text" id="task-title" placeholder="Task title" autocomplete="off" />
+          <span class="error-message" id="title-error"></span>
+        </div>
+        <div class="field">
+          <input type="text" id="task-due-date" placeholder="Due date (e.g. tomorrow, 2026-09-01)" autocomplete="off" />
+        </div>
+        <div class="field">
+          <select id="task-priority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <button type="submit">Add Task</button>
+      </form>
+
+      <form id="quick-add-form">
+        <h2>Quick-Add (plain English)</h2>
+        <div class="field">
+          <input type="text" id="quick-add-input" placeholder="e.g. Finish the report next Friday, it's urgent" autocomplete="off" />
+        </div>
+        <button type="submit">Quick Add</button>
+      </form>
+    </section>
+
+    <section id="stats-panel" class="stats-panel">
+      <h2>Project stats</h2>
+      <div id="stats-content">Loading…</div>
+    </section>
+
+    <section>
+      <h2>Tasks</h2>
+      <div id="task-list-container"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
