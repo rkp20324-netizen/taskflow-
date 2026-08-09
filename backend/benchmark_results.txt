@@ -1,0 +1,23 @@
+TaskFlow Section 2 Benchmark — comparison counts
+
+
+=== Size: 10 tasks ===
+insertion_sort_count (sort by priority): 20 comparisons
+binary_search_count (hit):  index=5, comparisons=3
+binary_search_count (miss): index=-1, comparisons=3
+linear_search_count (hit):  index=5, comparisons=6
+linear_search_count (miss): index=-1, comparisons=10
+
+=== Size: 500 tasks ===
+insertion_sort_count (sort by priority): 42811 comparisons
+binary_search_count (hit):  index=250, comparisons=8
+binary_search_count (miss): index=-1, comparisons=8
+linear_search_count (hit):  index=250, comparisons=251
+linear_search_count (miss): index=-1, comparisons=500
+
+=== Size: 3000 tasks ===
+insertion_sort_count (sort by priority): 1489920 comparisons
+binary_search_count (hit):  index=1500, comparisons=11
+binary_search_count (miss): index=-1, comparisons=11
+linear_search_count (hit):  index=1500, comparisons=1501
+linear_search_count (miss): index=-1, comparisons=3000
