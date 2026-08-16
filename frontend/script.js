@@ -1,6 +1,6 @@
 // TaskFlow frontend — talks to the real FastAPI backend (two-process run).
 // Change this if your backend runs on a different host/port.
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://taskflow-backend-v3se.onrender.com";
 const CACHE_KEY = "taskflow_tasks_cache";
 
 const els = {
@@ -205,8 +205,7 @@ els.addForm.addEventListener("submit", async (event) => {
     // was opened via file:// / a port CORS doesn't allow.
     console.error("Add task request failed:", err);
     els.titleError.textContent =
-      "Could not reach the backend — is it running on http://127.0.0.1:8000, and is this page served from http://127.0.0.1:5500?";
-  }
+  "Could not reach the backend — please check your internet connection or try again."  }
 });
 
 els.titleInput.addEventListener("input", () => {
@@ -242,7 +241,7 @@ els.quickAddForm.addEventListener("submit", async (event) => {
     }
   } catch (err) {
     console.error("Quick-add request failed:", err);
-    alert("Could not reach the backend — is it running on http://127.0.0.1:8000, and is this page served from http://127.0.0.1:5500?");
+    alert("Could not reach the backend — please check your internet connection or try again.");
   }
 });
 
