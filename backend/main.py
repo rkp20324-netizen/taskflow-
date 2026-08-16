@@ -48,6 +48,8 @@ async def log_requests(request, call_next):
 ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",
     "http://localhost:5500",
+    "https://taskflow-a18f.onrender.com",
+
 ]
 
 app.add_middleware(
