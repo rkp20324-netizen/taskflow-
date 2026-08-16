@@ -182,18 +182,30 @@ els.addForm.addEventListener("submit", async (event) => {
     project_id: parseInt(els.projectInput.value, 10),
   };
 
-  const response = await fetch(`${API_BASE}/tasks`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
+  try {
+    const response = await fetch(`${API_BASE}/tasks`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-  if (response.ok) {
-    els.titleInput.value = "";
-    els.dueDateInput.value = "";
-    await refreshAll();
-  } else {
-    els.titleError.textContent = "Could not add task — check the fields.";
+    if (response.ok) {
+      els.titleInput.value = "";
+      els.dueDateInput.value = "";
+      await refreshAll();
+    } else {
+      const body = await response.json().catch(() => null);
+      els.titleError.textContent = body?.detail
+        ? `Could not add task — ${JSON.stringify(body.detail)}`
+        : "Could not add task — check the fields.";
+    }
+  } catch (err) {
+    // Network/CORS failures land here — fetch() throws before you ever
+    // get a response, e.g. if the backend isn't running, or if this page
+    // was opened via file:// / a port CORS doesn't allow.
+    console.error("Add task request failed:", err);
+    els.titleError.textContent =
+      "Could not reach the backend — is it running on http://127.0.0.1:8000, and is this page served from http://127.0.0.1:5500?";
   }
 });
 
@@ -211,20 +223,26 @@ els.quickAddForm.addEventListener("submit", async (event) => {
   const description = els.quickAddInput.value.trim();
   if (!description) return;
 
-  const response = await fetch(`${API_BASE}/tasks/quick-add`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      description,
-      project_id: parseInt(els.projectInput.value, 10),
-    }),
-  });
+  try {
+    const response = await fetch(`${API_BASE}/tasks/quick-add`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        description,
+        project_id: parseInt(els.projectInput.value, 10),
+      }),
+    });
 
-  if (response.ok) {
-    els.quickAddInput.value = "";
-    await refreshAll();
-  } else {
-    alert("Quick-add failed — check the project ID and description.");
+    if (response.ok) {
+      els.quickAddInput.value = "";
+      await refreshAll();
+    } else {
+      const body = await response.json().catch(() => null);
+      alert(body?.detail ? `Quick-add failed — ${JSON.stringify(body.detail)}` : "Quick-add failed — check the project ID and description.");
+    }
+  } catch (err) {
+    console.error("Quick-add request failed:", err);
+    alert("Could not reach the backend — is it running on http://127.0.0.1:8000, and is this page served from http://127.0.0.1:5500?");
   }
 });
 
